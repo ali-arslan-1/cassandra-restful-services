@@ -14,7 +14,9 @@
     <h1>{{ title }}</h1>
     <p>Welcome to {{ title }}</p>
 
+    <textarea ng-model="query" rows="4" cols="50" ></textarea>
     <input type="button" ng-click="execute()" ng-value="testModel"/>
+
 
   </div>
   </body>
