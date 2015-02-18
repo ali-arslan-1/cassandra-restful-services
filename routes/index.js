@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
-var cassandra = require('cassandra-driver');
+
+var dataService = require('../services/dataService')();
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -10,20 +11,9 @@ router.get('/', function(req, res, next) {
 
 router.get('/fetchData', function(req, res, next) {
     console.log(req.query.query);
-    var client = new cassandra.Client({contactPoints: ['127.0.0.1'], keyspace: 'company'});
-    client.execute(req.query.query, function (err, result) {
-        if (!err) {
-            if (result.rows.length > 0) {
-                //var user = result.rows[0];
-                console.log(result);
-                res.send(result);
-            } else {
-                console.log("No results");
-            }
-        }else{
-            console.log(err);
-        }
-
+    var result = dataService.execute(req.query.query, function(flag,err,result){
+        res.send(result);
+        console.log(result,err);
     });
 
 });
