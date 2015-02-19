@@ -9,7 +9,7 @@ var dataService = require('../services/dataService')();
 
 
 
-router.get('/', function(req, res, next) {
+router.get('/keyspaces', function(req, res, next) {
 
     var statement = "SELECT * FROM system.schema_keyspaces;";
 
@@ -23,7 +23,7 @@ router.get('/', function(req, res, next) {
 
 });
 
-router.post('/', function(req, res) {
+router.post('/keyspaces', function(req, res) {
 
     var keyspaceName = req.body.keyspaceName;
     var statement = "CREATE KEYSPACE "+keyspaceName+" WITH REPLICATION = ";
@@ -46,5 +46,7 @@ router.post('/', function(req, res) {
 
 });
 
+var tableRoute = require('../routes/tables');
+router.use('/', tableRoute);
 
 module.exports = router;

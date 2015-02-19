@@ -18,4 +18,7 @@ router.get('/fetchData', function(req, res, next) {
 
 });
 
+var keyspaceRoute = require('../routes/keyspaces');
+router.use('/', keyspaceRoute);
+
 module.exports = router;

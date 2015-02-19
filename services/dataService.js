@@ -8,8 +8,8 @@ var client = new cassandra.Client({contactPoints: ['127.0.0.1']});
 
 module.exports = function(contactPoints) {
     return {
-        execute: function(query , callback) {
-            client.execute(query , function (err, result) {
+        execute: function(query ,callback,params) {
+            client.execute(query ,params ,function (err, result) {
                 if (!err) {
                     if (result.rows.length > 0) {
                         //var user = result.rows[0];

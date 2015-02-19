@@ -7,9 +7,11 @@ var bodyParser = require('body-parser');
 
 
 var indexRoutes = require('./routes/index');
-var keyspaceRoute = require('./routes/keyspaces');
-var users = require('./routes/users');
+//var keyspaceRoute = require('./routes/keyspaces');
+//var tableRoute = require('./routes/tables');
+//var users = require('./routes/users');
 
+//var columns = require('./routes/columns')
 var app = express();
 
 // view engine setup
@@ -24,7 +26,8 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/keyspaces', keyspaceRoute);
+//app.use('/keyspaces/:keyspaceName/tables',tableRoute);
+//app.use('/keyspaces', keyspaceRoute);
 app.use('/', indexRoutes);
 
 
