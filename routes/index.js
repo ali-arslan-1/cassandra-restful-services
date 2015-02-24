@@ -12,7 +12,9 @@ router.get('/', function(req, res, next) {
 router.get('/fetchData', function(req, res, next) {
     console.log(req.query.query);
     var result = dataService.execute(req.query.query, function(flag,err,result){
-        res.send(result);
+       if(!err)
+           res.send(result);
+        else res.send(err);
         console.log(result,err);
     });
 

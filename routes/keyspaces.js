@@ -6,42 +6,33 @@ var underscore = require('underscore');
 var router = express.Router();
 
 var dataService = require('../services/dataService')();
-
+var keyspace = require('../models/keyspace');
 
 
 router.get('/keyspaces', function(req, res, next) {
 
-    var statement = "SELECT * FROM system.schema_keyspaces;";
+    keyspace.getAll( function(response){
+        res.send(response);
+    });
 
-    var result = dataService.execute(statement, function(flag,err,result){
-        if (err)
-            res.send(err);
-        else
-            res.send(result);
-        console.log(result,err);
+});
+
+router.get('/keyspaces/:name', function(req, res, next) {
+
+    keyspace.get(req.params.name, function(response){
+        res.send(response);
     });
 
 });
 
 router.post('/keyspaces', function(req, res) {
 
-    var keyspaceName = req.body.keyspaceName;
-    var statement = "CREATE KEYSPACE "+keyspaceName+" WITH REPLICATION = ";
-
+    var name = req.body.name;
     var strategy = req.body.strategy;
-    if(underscore.isEqual(strategy,"SimpleStrategy")){
-        var replicationFactor = underscore.isNull(req.body.replicationFactor) ?3:req.body.replicationFactor;
-        statement = statement+"{ 'class' : 'SimpleStrategy', 'replication_factor' : "+replicationFactor+" };"
+    var options = req.body.options;
 
-    }else if(underscore.isEqual(strategy,"NetworkTopologyStrategy")){
-        var replicationStatement = JSON.stringify(req.body.replicationStatement);
-        statement = statement+replicationStatement
-    }else {
-        res.status(400).send('Invalid input parameters');
-    }
-    var result = dataService.execute(statement, function(flag,err,result){
-        res.send(result);
-        console.log(result,err);
+    keyspace.create(name,strategy,options ,function(response){
+        res.send(response);
     });
 
 });

@@ -11,10 +11,16 @@ module.exports = function(contactPoints) {
         execute: function(query ,callback,params) {
             client.execute(query ,params ,function (err, result) {
                 if (!err) {
-                    if (result.rows.length > 0) {
+                    if (result && result.rows && result.rows.length > 0) {
                         //var user = result.rows[0];
                         callback(true,err,result);
-                    } else {
+                    } else if (result){
+                        callback(true,null,result);
+                        /*if(result.schemaChange){
+
+                        }*/
+                    }
+                    else {
                         callback(false);
                     }
                 }else {

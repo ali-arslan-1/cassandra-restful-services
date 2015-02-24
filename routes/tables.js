@@ -6,22 +6,32 @@ var express = require('express');
 var underscore = require('underscore');
 var router = express.Router();
 
-var dataService = require('../services/dataService')();
-
+var table = require('../models/table');
 
 
 router.get('/keyspaces/:keyspace_name/tables', function(req, res, next) {
 
-    var statement = "SELECT columnfamily_name FROM system.schema_columnfamilies where keyspace_name=?";
-    var result = dataService.execute(statement, function(flag,err,result){
-        if (err)
-            res.send(err);
-        else
-            res.send(result);
-        console.log(result,err);
+    table.getAll(req.params.keyspace_name, function(response){
+        res.send(response);
+    });
 
-    },[req.params.keyspace_name]);
+});
 
+router.get('/keyspaces/:keyspace_name/tables/:table_name', function(req, res, next) {
+
+    table.get(req.params.keyspace_name,req.params.table_name, function(response){
+        res.send(response);
+    });
+
+});
+
+router.post('/keyspaces/:keyspace_name/tables', function(req, res, next) {
+
+    table.create(req.params.keyspace_name, req.body.name, req.body.columns,
+        req.body.primarykeys ,  req.body.clustering_columns,
+        function (response) {
+            res.send(response);
+    });
 });
 
 var columnRoute = require('../routes/columns');
