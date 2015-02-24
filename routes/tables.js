@@ -27,8 +27,7 @@ router.get('/keyspaces/:keyspace_name/tables/:table_name', function(req, res, ne
 
 router.post('/keyspaces/:keyspace_name/tables', function(req, res, next) {
 
-    table.create(req.params.keyspace_name, req.body.name, req.body.columns,
-        req.body.primarykeys ,  req.body.clustering_columns,
+    table.create(req.params.keyspace_name, req.body.tableInfo,
         function (response) {
             res.send(response);
     });

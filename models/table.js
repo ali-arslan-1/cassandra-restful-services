@@ -19,14 +19,18 @@ exports.get = function(keyspaceName, tableName,callback){
 
 }
 
-exports.create = function (keyspaceName, tableName, columns, primarykeys,clusteringColumns,callback){
+exports.create = function (keyspaceName, tableInfo,callback){
 
+    var tableName = tableInfo.name ;
+    var  columns = tableInfo.columns ;
+    var    primarykeys = tableInfo.primarykeys ;
+    var    clusteringColumns = tableInfo.clusteringColumns ;
 
     var columnsStatement = ""
     var clusteringColumnsStatement = "";
 
     for(index in columns){
-        columnsStatement  = columnsStatement+columns[index].name+"  "+columns[index].data_type+" , ";
+        columnsStatement  = columnsStatement+columns[index].name+"  "+columns[index].dataType+" , ";
     }
 
     if(!clusteringColumns && clusteringColumns.length>0){

@@ -18,7 +18,12 @@ exports.get = function(name,callback){
 
 }
 
-exports.create = function(keyspaceName ,strategy ,options,callback){
+exports.create = function(keyspaceInfo,callback){
+
+    var keyspaceName = keyspaceInfo.name
+    var strategy    = keyspaceInfo.strategy;
+    var options = keyspaceInfo.options;
+
     var statement = "CREATE KEYSPACE "+keyspaceName+" WITH REPLICATION = { 'class' : '"+strategy+"' ";
     var optionsQuery = ""
     for(index in options){

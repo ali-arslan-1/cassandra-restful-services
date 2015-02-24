@@ -30,4 +30,14 @@ router.get('/keyspaces/:keyspace_name/tables/:table_name/columns/:column_name', 
 
 });
 
+router.post('/keyspaces/:keyspace_name/tables/:table_name/columns', function(req, res, next) {
+
+    column.create(req.params.keyspace_name,req.params.table_name,req.body.columnInfo, function(response){
+        res.send(response);
+    });
+
+});
+
+
+
 module.exports = router;

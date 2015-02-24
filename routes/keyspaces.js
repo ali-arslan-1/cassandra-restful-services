@@ -27,11 +27,9 @@ router.get('/keyspaces/:name', function(req, res, next) {
 
 router.post('/keyspaces', function(req, res) {
 
-    var name = req.body.name;
-    var strategy = req.body.strategy;
-    var options = req.body.options;
 
-    keyspace.create(name,strategy,options ,function(response){
+
+    keyspace.create(req.body.keyspaceInfo ,function(response){
         res.send(response);
     });
 
