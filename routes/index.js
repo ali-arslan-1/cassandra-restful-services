@@ -12,17 +12,6 @@ router.get('/', function(req, res, next) {
 });
 
 
-router.get('/fetchData', function(req, res, next) {
-    console.log(req.query.query);
-    var result = dataService.execute(req.query.query, function(flag,err,result){
-       if(!err)
-           res.send(result);
-        else res.send(err);
-        console.log(result,err);
-    });
-
-});
-
 router.post('/connections', function(req, res, next) {
 
     if(!(req.body.connectionInfo.name) || util.isNullOrEmpty(req.body.connectionInfo.hosts)){
@@ -41,6 +30,16 @@ router.post('/connections', function(req, res, next) {
 router.get('/connections', function(req, res, next) {
 
     connectionFactory.getConnections(function (response, status) {
+        status = status?status:200;
+        res.status(status);
+        res.send(response);
+    });
+
+});
+
+router.delete('/connections', function(req, res, next) {
+
+    connectionFactory.deleteConnection(req.body.connectionInfo.name,function (response, status) {
         status = status?status:200;
         res.status(status);
         res.send(response);

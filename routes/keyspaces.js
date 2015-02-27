@@ -7,6 +7,14 @@ var router = express.Router();
 var keyspace = require('../models/keyspace');
 
 
+router.get('/execute', function(req, res, next) {
+
+    keyspace.execute( req.query.statement, function(response){
+        res.send(response);
+    });
+
+});
+
 router.get('/keyspaces', function(req, res, next) {
 
     keyspace.getAll( function(response){

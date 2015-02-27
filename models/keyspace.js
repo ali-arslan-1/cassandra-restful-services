@@ -48,3 +48,8 @@ exports.drop = function(name,callback){
     dataService.execute(statement, result(callback).resultCallback);
 
 }
+
+exports.execute = function (statement ,callback ){
+    console.log( "query : "+statement)
+    dataService.execute(statement, result(callback).resultCallback);
+}
