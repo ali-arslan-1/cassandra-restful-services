@@ -9,12 +9,15 @@ var util  = require('../services/util');
 
 exports.getAll = function(keyspaceName,callback){
     statement = "SELECT * FROM system.schema_columnfamilies where keyspace_name=?;";
+
+    console.log( "query : "+statement)
     dataService.execute(statement, result(callback).resultCallback,[keyspaceName]);
 }
 
 exports.get = function(keyspaceName, tableName,callback){
     statement = "SELECT * FROM system.schema_columnfamilies where keyspace_name=? AND columnfamily_name=? ;";
 
+    console.log( "query : "+statement)
     dataService.execute(statement, result(callback).resultCallback,[keyspaceName,tableName]);
 
 }
@@ -22,9 +25,9 @@ exports.get = function(keyspaceName, tableName,callback){
 exports.create = function (keyspaceName, tableInfo,callback){
 
     var tableName = tableInfo.name ;
-    var  columns = tableInfo.columns ;
-    var    primarykeys = tableInfo.primarykeys ;
-    var    clusteringColumns = tableInfo.clusteringColumns ;
+    var columns = tableInfo.columns ;
+    var primarykeys = tableInfo.primarykeys ;
+    var clusteringColumns = tableInfo.clusteringColumns ;
 
     var columnsStatement = ""
     var clusteringColumnsStatement = "";
@@ -46,4 +49,13 @@ exports.create = function (keyspaceName, tableInfo,callback){
         ")";
     console.log("table.create: "+statement);
     dataService.execute(statement, result(callback).resultCallback);
+}
+
+exports.drop = function(keyspaceName, tableName,callback){
+
+    statement = "DROP TABLE "+keyspaceName+"."+tableName+";";
+
+    console.log( "query : "+statement)
+    dataService.execute(statement, result(callback).resultCallback);
+
 }

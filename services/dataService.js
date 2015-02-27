@@ -4,10 +4,11 @@
 var express = require('express');
 var cassandra = require('cassandra-driver');
 
-var client = new cassandra.Client({contactPoints: ['127.0.0.1']});
+var client = null;
 
 module.exports = function(contactPoints) {
-    return {
+    client = new cassandra.Client({contactPoints: ['127.0.0.1']})
+    var ret  =  {
         execute: function(query ,callback,params) {
             client.execute(query ,params ,function (err, result) {
                 if (!err) {
@@ -29,4 +30,5 @@ module.exports = function(contactPoints) {
             });
         }
     };
+    return ret;
 }

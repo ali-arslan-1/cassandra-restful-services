@@ -38,6 +38,14 @@ router.post('/keyspaces/:keyspace_name/tables/:table_name/columns', function(req
 
 });
 
+router.delete('/keyspaces/:keyspace_name/tables/:table_name/columns/:column_name', function(req, res, next) {
+
+    column.drop(req.params.keyspace_name,req.params.table_name,req.params.column_name, function(response){
+        res.send(response);
+    });
+
+});
+
 
 
 module.exports = router;

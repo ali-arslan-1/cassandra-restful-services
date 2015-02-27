@@ -11,8 +11,9 @@
     "debug": "~2.1.1",
     "express": "~4.11.1",
     "hjs": "~0.0.6",
+    "jsonfile": "^2.0.0",
+    "less-middleware": "1.0.x",
     "morgan": "~1.5.1",
-    "serve-favicon": "~2.2.0",
-    "less-middleware": "1.0.x"
+    "serve-favicon": "~2.2.0"
   }
 }

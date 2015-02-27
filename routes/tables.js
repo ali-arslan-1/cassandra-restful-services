@@ -33,8 +33,17 @@ router.post('/keyspaces/:keyspace_name/tables', function(req, res, next) {
     });
 });
 
-var columnRoute = require('../routes/columns');
-router.use('/', columnRoute);
+router.delete('/keyspaces/:keyspace_name/tables/:table_name', function(req, res, next) {
 
+    table.drop(req.params.keyspace_name,req.params.table_name, function(response){
+        res.send(response);
+    });
+
+});
+
+var columnRoute = require('../routes/columns');
+var recordRoute = require('../routes/records');
+router.use('/', columnRoute);
+router.use('/', recordRoute);
 
 module.exports = router;
