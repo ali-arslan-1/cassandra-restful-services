@@ -7,8 +7,8 @@
  */
 
 var express = require('express');
-var underscore = require('underscore');
 var router = express.Router();
+var formatter = require('../services/formatter');
 
 var column = require('../models/column');
 
@@ -17,6 +17,7 @@ var column = require('../models/column');
 router.get('/keyspaces/:keyspace_name/tables/:table_name/columns', function(req, res, next) {
 
     column.getAll(req.params.keyspace_name,req.params.table_name, function(response){
+        response = formatter.columnGetResponse(response);
         res.send(response);
     });
 
@@ -25,6 +26,7 @@ router.get('/keyspaces/:keyspace_name/tables/:table_name/columns', function(req,
 router.get('/keyspaces/:keyspace_name/tables/:table_name/columns/:column_name', function(req, res, next) {
 
     column.get(req.params.keyspace_name,req.params.table_name,req.params.column_name, function(response){
+        response = formatter.columnGetResponse(response);
         res.send(response);
     });
 
