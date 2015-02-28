@@ -7,8 +7,12 @@ var result = require('../models/result');
 var util  = require('../services/util');
 
 
-exports.getAll = function(keyspaceName, tableName,callback){
-    statement = "SELECT * FROM "+keyspaceName+"."+tableName+" ;";
+exports.getAll = function(keyspaceName, tableName,sortInfo,callback){
+
+    var orderClause="";
+    if(orderClause)
+        orderClause = "ORDER BY "+sortInfo.column+" "+sortInfo.order+"";
+    statement = "SELECT * FROM "+keyspaceName+"."+tableName+" "+orderClause+" ;";
 
     console.log( "query : "+statement)
     dataService.execute(statement, result(callback).resultCallback);
@@ -30,7 +34,7 @@ exports.add = function(keyspaceName, tableName,recordInfo,callback){
                 || util.validator.isUUID(recordInfo.columns[col].value)){
                 values+= recordInfo.columns[col].value + ",";
             }else{*/
-                values+="'"+ recordInfo.columns[col].value + "',";
+                values+=""+ recordInfo.columns[col].value + ",";
             //}
         }
     }

@@ -9,6 +9,7 @@ var jf = require('jsonfile');
 var file = 'etc/conn.json';
 
 var client;
+
 exports.connect = function(options, callback){
 
     var clientOptions = {
@@ -23,12 +24,7 @@ exports.connect = function(options, callback){
 
     client.connect(function(err){
         console.log(err);
-
-        if(!err)
-            _this.saveConnection(options,callback);
-        else{
-            result(callback).connectCallback(err);
-        }
+        result(callback).connectCallback(err);
 
     });
 
@@ -44,7 +40,7 @@ exports.saveConnection  = function(options,callback){
         }else{
            for(conn in obj.connections){
                 if(obj.connections[conn].name == options.name){
-                    obj.connections[conn].hosts = options.hosts;
+                    obj.connections[conn]= options;
                     saved = true;
                 }
            }

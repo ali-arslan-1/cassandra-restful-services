@@ -11,7 +11,7 @@ var record = require('../models/record');
 
 router.get('/keyspaces/:keyspace_name/tables/:table_name/records', function(req, res, next) {
 
-    record.getAll(req.params.keyspace_name,req.params.table_name, function(response){
+    record.getAll(req.params.keyspace_name,req.params.table_name,req.params.sortingInfo, function(response){
         res.send(response);
     });
 

@@ -3,7 +3,7 @@
  */
 
 var express = require('express');
-var underscore = require('underscore');
+var formatter = require('../services/formatter');
 var router = express.Router();
 
 var table = require('../models/table');
@@ -12,6 +12,7 @@ var table = require('../models/table');
 router.get('/keyspaces/:keyspace_name/tables', function(req, res, next) {
 
     table.getAll(req.params.keyspace_name, function(response){
+        response = formatter.tableGetResponse(response);
         res.send(response);
     });
 
@@ -20,6 +21,7 @@ router.get('/keyspaces/:keyspace_name/tables', function(req, res, next) {
 router.get('/keyspaces/:keyspace_name/tables/:table_name', function(req, res, next) {
 
     table.get(req.params.keyspace_name,req.params.table_name, function(response){
+        response = formatter.tableGetResponse(response);
         res.send(response);
     });
 

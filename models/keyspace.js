@@ -8,7 +8,6 @@ var result = require('../models/result');
 
 exports.getAll = function(callback){
     statement = "SELECT * FROM system.schema_keyspaces;";
-    var method = util.extractFunctionName(arguments.callee.toString());
 
     console.log( "query : "+statement)
 

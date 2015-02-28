@@ -14,6 +14,7 @@ router.get('/', function(req, res, next) {
 
 router.post('/connections', function(req, res, next) {
 
+
     if(!(req.body.connectionInfo.name) || util.isNullOrEmpty(req.body.connectionInfo.hosts)){
         result.setResponse("Please provide correct request parameters");
         res.status(400);
@@ -22,7 +23,14 @@ router.post('/connections', function(req, res, next) {
     }
     else {
         connectionFactory.connect(req.body.connectionInfo, function (response) {
-            res.send(response);
+            if(response.success){
+                connectionFactory.saveConnection(req.body.connectionInfo, function(response){
+                    res.send(response);
+                })
+            }else{
+                res.send(response);
+            }
+
         });
     }
 });
