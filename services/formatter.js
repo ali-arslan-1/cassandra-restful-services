@@ -3,6 +3,7 @@
  */
 
 var _this = this;
+var util  = require('../services/util');
 
 exports.tableGetResponse  = function(response){
     for(row in response.data){
@@ -20,6 +21,20 @@ exports.columnGetResponse  = function(response){
     for(row in response.data){
         var formattedData  = {};
         var dataType = _this.getColumnDataType(response.data[row].validator);
+        if(!dataType){
+            dataType = response.data[row].validator;
+            var validators = response.data[row].validator.split(/[(,)]+/);
+            validators = util.commons.compact(validators);
+            var type;
+            for(validator in validators){
+                type = _this.getColumnDataType(validators[validator])
+                dataType = dataType.replace(validators[validator], type);
+
+            }
+            dataType = util.replaceAll(dataType,'(','<');
+            dataType = util.replaceAll(dataType,')','>');
+        }
+
         formattedData.columnName = response.data[row].column_name;
         formattedData.keyspaceName = response.data[row].keyspace_name;
         formattedData.tableName = response.data[row].columnfamily_name;

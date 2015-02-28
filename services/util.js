@@ -36,6 +36,13 @@ exports.isNullOrEmpty = function(array){
     return false;
 }
 
+exports.replaceAll =  function(str, find, replace) {
+    return str.replace(new RegExp(escapeRegExp(find), 'g'), replace);
+}
+
+function escapeRegExp(string) {
+    return string.replace(/([.*+?^=!:${}()|\[\]\/\\])/g, "\\$1");
+}
 
 exports.validator = validator;
 exports.commons =  underscore;
