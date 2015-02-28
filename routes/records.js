@@ -21,6 +21,7 @@ router.post('/keyspaces/:keyspace_name/tables/:table_name/records', function(req
 
     record.add(req.params.keyspace_name,req.params.table_name,req.body.recordInfo,
         function(response){
+            response.message = response.success?"Record added successfully":response.message;
             res.send(response);
     });
 

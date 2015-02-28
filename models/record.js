@@ -28,8 +28,15 @@ exports.add = function(keyspaceName, tableName,recordInfo,callback){
     for(col in recordInfo.columns){
         columns+=" "+recordInfo.columns[col].name+",";
         if(util.commons.isArray(recordInfo.columns[col].value)){
-            values+="[" +util.arrayToString(recordInfo.columns[col].value,false)+"],";
-        }else{
+            if(recordInfo.columns[col].type.indexOf("set") > -1){
+                values+="{" +util.arrayToString(recordInfo.columns[col].value,false)+"},";
+            }else{
+                values+="[" +util.arrayToString(recordInfo.columns[col].value,false)+"],";
+            }
+        }else if(util.commons.isObject(recordInfo.columns[col].value)){
+            values += util.replaceAll(JSON.stringify(recordInfo.columns[col].value),'"',"")+",";
+        }
+        else {
            /* if(util.validator.isNumeric(recordInfo.columns[col].value)
                 || util.validator.isUUID(recordInfo.columns[col].value)){
                 values+= recordInfo.columns[col].value + ",";

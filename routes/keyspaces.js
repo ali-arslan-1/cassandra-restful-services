@@ -36,6 +36,7 @@ router.post('/keyspaces', function(req, res) {
 
 
     keyspace.create(req.body.keyspaceInfo ,function(response){
+        response.message = response.success?"Keyspace created successfully":response.message;
         res.send(response);
     });
 
@@ -44,6 +45,7 @@ router.post('/keyspaces', function(req, res) {
 router.delete('/keyspaces/:name', function(req, res, next) {
 
     keyspace.drop(req.params.name, function(response){
+        response.message = response.success?"Keyspace dropped successfully":response.message;
         res.send(response);
     });
 

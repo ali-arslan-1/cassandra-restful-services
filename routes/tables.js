@@ -31,6 +31,7 @@ router.post('/keyspaces/:keyspace_name/tables', function(req, res, next) {
 
     table.create(req.params.keyspace_name, req.body.tableInfo,
         function (response) {
+            response.message = response.success?"Table created successfully":response.message;
             res.send(response);
     });
 });
@@ -38,6 +39,7 @@ router.post('/keyspaces/:keyspace_name/tables', function(req, res, next) {
 router.delete('/keyspaces/:keyspace_name/tables/:table_name', function(req, res, next) {
 
     table.drop(req.params.keyspace_name,req.params.table_name, function(response){
+        response.message = response.success?"Table dropped successfully":response.message;
         res.send(response);
     });
 
