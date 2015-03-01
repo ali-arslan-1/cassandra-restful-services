@@ -30,21 +30,21 @@ app.use(express.static(path.join(__dirname, 'public')));
 //app.use('/keyspaces', keyspaceRoute);
 
 /*interceptor*/
-app.use(function(req, res, next) {
+app.all('*', function(req, res, next) {
+    if ( req.path == '/' || req.path == '/connections') return next();
     var connection = req.get('connection-name');
-    var resCommitted = false;
     connectionFactory.getConnection(connection,function(response){
         if(response.success){
             connectionFactory.connect(response.data,function(_response){
                 if(!_response.success){
-                    res.send(_response);
+                    res.json(_response);
                 }else{
                     next();
                 }
             })
         }else{
             response.message = "Invalid connection for request";
-            res.send(response);
+            res.json(response);
         }
     });
 

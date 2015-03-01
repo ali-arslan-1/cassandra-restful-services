@@ -8,14 +8,14 @@ var response = {
     message: "",
     errorCode: -1
 
-}
+};
 
 var clearResponse = function(){
     response.success = false;
     response.data = [];
     response.message = "";
     response.errorCode = -1;
-}
+};
 
 
 module.exports = function(callback) {
@@ -68,4 +68,4 @@ module.exports = function(callback) {
         }
     }
     return ret;
-}
+};

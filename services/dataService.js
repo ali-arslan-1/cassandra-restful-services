@@ -1,7 +1,6 @@
 /**
  * Created by AliArslan on 18.02.15.
  */
-var cassandra = require('cassandra-driver');
 
 var connectionFactory = require('../services/connectionFactory');
 

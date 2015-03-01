@@ -65,14 +65,13 @@ exports.saveConnection  = function(options,callback){
 
 exports.getConnections  = function(callback){
     jf.readFile(file, function(err, obj) {
-        result = result();
         if(err){
             console.log(err);
-            result.setResponse("Error while retrieving connections")
-            callback(result.getResponse(), 500);
+            result().setResponse("Error while retrieving connections")
+            callback( result().getResponse(), 500);
         }else{
-            result.setResponse("Connections retrieved successfully",obj.connections,true);
-            callback(result.getResponse());
+            result().setResponse("Connections retrieved successfully",obj.connections,true);
+            callback( result().getResponse());
         }
     });
 
