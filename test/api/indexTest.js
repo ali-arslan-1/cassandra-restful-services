@@ -6,7 +6,6 @@ var request = require('supertest');
 var app = require("../../app");
 
 var connectionFactory = require('../../services/connectionFactory');
-var result = require('../../models/result')();
 
 
 describe('GET /connections', function(){
@@ -34,6 +33,13 @@ describe('GET /connections', function(){
 
 describe('POST /connections', function(){
 
+    var JsonResponse = {
+        success: true,
+        data: [],
+        message: "Connection established successfully",
+        errorCode: -1
+
+    };
     var PostConnectionsJsonRequest;
     before(function(done){
         PostConnectionsJsonRequest = {
@@ -45,7 +51,6 @@ describe('POST /connections', function(){
                 port:9042
             }
         };
-        result.setResponse("Connection established successfully",null,true);
         done();
     });
 
@@ -55,7 +60,7 @@ describe('POST /connections', function(){
             .set('Accept', 'application/json')
             .send(PostConnectionsJsonRequest)
             .expect('Content-Type', /json/)
-            .expect(result.getResponse())
+            .expect(JsonResponse)
             .expect(200)
             .end(function(err, res){
                 if (err) return done(err);
@@ -67,6 +72,13 @@ describe('POST /connections', function(){
 
 describe('DELETE /connections', function(){
 
+    var JsonResponse = {
+        success: true,
+        data: [],
+        message: "Connection removed successfully",
+        errorCode: -1
+
+    };
     var PostConnectionsJsonRequest;
     before(function(done){
         PostConnectionsJsonRequest = {
@@ -74,7 +86,9 @@ describe('DELETE /connections', function(){
                 name:"testConnection"
             }
         };
-        result.setResponse("Connection removed successfully",null,true);
+        connectionFactory.deleteConnection  = function(name, callback){
+            callback(JsonResponse);
+        }
         done();
     });
 
@@ -84,7 +98,7 @@ describe('DELETE /connections', function(){
             .set('Accept', 'application/json')
             .send(PostConnectionsJsonRequest)
             .expect('Content-Type', /json/)
-            .expect(result.getResponse())
+            .expect(JsonResponse)
             .expect(200)
             .end(function(err, res){
                 if (err) return done(err);
