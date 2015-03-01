@@ -78,6 +78,30 @@ exports.getConnections  = function(callback){
 
 }
 
+exports.getConnection  = function(name,callback){
+    var found = false;
+    jf.readFile(file, function(err, obj) {
+        if(err){
+            console.log(err);
+            result().setResponse("Error while retrieving connections")
+            callback(result().getResponse(), 500);
+        }else{
+            for(conn in obj.connections){
+                if(obj.connections[conn].name == name){
+                    found = true;
+                    result().setResponse("Connection retrieved successfully",obj.connections[conn],found);
+                    callback(result().getResponse());
+                }
+            }
+            if(!found){
+                result().setResponse("Connection not found",null,found);
+                callback(result().getResponse());
+            }
+        }
+    });
+
+}
+
 exports.deleteConnection  = function(name, callback){
     var removed = false;
     jf.readFile(file, function(err, obj) {
@@ -112,4 +136,8 @@ exports.deleteConnection  = function(name, callback){
         }
     });
 
+}
+
+exports.getClientInstance = function(){
+    return client;
 }

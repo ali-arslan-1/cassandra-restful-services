@@ -3,7 +3,7 @@
  */
 
 var statement;
-var dataService = require('../services/dataService')();
+var dataService = require('../services/dataService');
 var result = require('../models/result');
 
 exports.getAll = function(keyspaceName,tableName,callback){

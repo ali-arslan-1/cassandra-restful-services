@@ -1,7 +1,6 @@
 var express = require('express');
 var router = express.Router();
 
-var dataService = require('../services/dataService')();
 var connectionFactory = require('../services/connectionFactory');
 var result = require('../models/result')();
 var util = require ('../services/util');

@@ -4,7 +4,7 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-
+var connectionFactory = require('./services/connectionFactory');
 
 var indexRoutes = require('./routes/index');
 //var keyspaceRoute = require('./routes/keyspaces');
@@ -28,6 +28,29 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 //app.use('/keyspaces/:keyspaceName/tables',tableRoute);
 //app.use('/keyspaces', keyspaceRoute);
+
+/*interceptor*/
+app.use(function(req, res, next) {
+    var connection = req.get('connection-name');
+    var resCommitted = false;
+    connectionFactory.getConnection(connection,function(response){
+        if(response.success){
+            connectionFactory.connect(response.data,function(_response){
+                if(!_response.success){
+                    res.send(_response);
+                }else{
+                    next();
+                }
+            })
+        }else{
+            response.message = "Invalid connection for request";
+            res.send(response);
+        }
+    });
+
+});
+//app.use(app.router);
+
 app.use('/', indexRoutes);
 
 

@@ -2,7 +2,7 @@
  * Created by AliArslan on 24.02.15.
  */
 var statement;
-var dataService = require('../services/dataService')();
+var dataService = require('../services/dataService');
 var result = require('../models/result');
 var util  = require('../services/util');
 

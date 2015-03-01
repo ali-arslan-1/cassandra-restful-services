@@ -3,7 +3,7 @@
  */
 
 var statement;
-var dataService = require('../services/dataService')();
+var dataService = require('../services/dataService');
 var result = require('../models/result');
 var util  = require('../services/util');
 
