@@ -157,7 +157,7 @@ License: You must have a valid license purchased only from themeforest(the above
 			<!-- END SAMPLE PORTLET CONFIGURATION MODAL FORM-->
 			
 			<!-- BEGIN PAGE HEADER-->
-			<div class="row forms" id="form-query" style="display:none;">
+			<div class="row forms" id="privateJS.addKeyspace();" style="display:none;">
 				<div class="col-md-12">
 					<!-- BEGIN PAGE TITLE & BREADCRUMB-->
 					<h3 class="page-title">
@@ -247,6 +247,83 @@ License: You must have a valid license purchased only from themeforest(the above
                 </div>
 
             </div>
+            <div class="row forms" id="form-new-table" style="display:none;">
+                <div class="col-md-12">
+                    <!-- BEGIN PORTLET-->
+                    <div class="portlet box grey">
+                        <div class="portlet-title">
+                            <div class="caption">
+                                <i class="fa fa-reorder"></i>New Table
+                            </div>
+
+                        </div>
+                        <div class="portlet-body form">
+                            <!-- BEGIN FORM-->
+                            <form action="#" id="form-username" class="form-horizontal form-bordered">
+                                <div class="form-body">
+                                    <div class="form-group">
+                                        <label class="control-label col-md-3">Table Name</label>
+                                        <div class="col-md-4">
+                                            <div class="input-icon right">
+                                                <input type="text" class="form-control" name="tableName" id="tableName">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group last" id="tableColumns">
+                                        <label class="control-label col-md-3">Columns</label>
+                                        <div class="col-md-4" id="columnStructure">
+                                            <div class="input-group" style="width: 325px" id="col-0">
+                                                <div class="input-group-btn">
+                                                    <input type="text" class="form-control columnStructureName" style="width: 36%;height: 33px;" />
+                                                    <a class="btn default" onclick="privateJS.addTableColumn();">
+                                                        <i class="fa fa-plus green"></i>
+                                                    </a>
+                                                    <select class="form-control columnStructureType" style="width: 36%;height: 33px;">
+                                                        <option value="ascii">ascii</option>
+                                                        <option value="bigint">bigint</option>
+                                                        <option value="blob">blob</option>
+                                                        <option value="boolean">boolean</option>
+                                                        <option value="counter">counter</option>
+                                                        <option value="decimal">decimal</option>
+                                                        <option value="double">double</option>
+                                                        <option value="float">float</option>
+                                                        <option value="inet">inet</option>
+                                                        <option value="int">int</option>
+                                                        <option value="text">text</option>
+                                                        <option value="timestamp">timestamp</option>
+                                                        <option value="uuid">uuid</option>
+                                                        <option value="timeuuid">timeuuid</option>
+                                                        <option value="varchar">varchar</option>
+                                                        <option value="varint">varint</option>
+                                                    </select>
+                                                    <select class="form-control columnStructurePrimaryKey" style="width: 36%;height: 33px;">
+                                                        <option value="no">Not Primary Key</option>
+                                                        <option value="yes">Primary Key</option>
+                                                    </select>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-actions fluid">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="col-md-offset-3 col-md-9">
+                                                <button type="button" class="btn green" onclick="privateJS.addTable();"><i class="fa fa-check"></i> Submit</button>
+                                                <button type="button" class="btn default" onclick="privateJS.closeAddTable();">Cancel</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                            <!-- END FORM-->
+                        </div>
+                    </div>
+                    <!-- END PORTLET-->
+                </div>
+
+            </div>
 			<div class="row">
 				<div class="col-md-12">
 					<div class="note note-info" id="success-message">
@@ -259,28 +336,14 @@ License: You must have a valid license purchased only from themeforest(the above
 			<!-- END DASHBOARD STATS -->
 			<div class="row" id="pageList">
 				<div class="col-md-12">
+
+                    <button type="button" class="btn btn-default pull-right add-new-button" id="addTable" style="display: none;" onclick="privateJS.showTablePanel();"><i class="fa fa-table"></i> New Table</button>
+                    <button type="button" class="btn btn-default pull-right add-new-button" id="addRow" style="display: none;" onclick="privateJS.showRowPanel();"><i class="fa fa-list"></i> New Row</button>
+                    <div class="clearfix" style="padding: 10px;">&nbsp;</div>
 					<table class="table table-striped table-bordered table-hover" id="sample_1">
 						<thead>
 							<tr>
-								<!--
-								<th class="table-checkbox">
-									<input type="checkbox" class="group-checkable" data-set="#sample_1 .checkboxes"/>
-								</th>
-								<th>
-									 Username
-								</th>
-								<th>
-									 Email
-								</th>
-								<th>
-									 Points
-								</th>
-								<th>
-									 Joined
-								</th>
-								<th>
-									 Action
-								</th> -->
+
 							</tr>
 						</thead>
 						<tbody>
