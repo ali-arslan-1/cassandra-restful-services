@@ -11,5 +11,6 @@ step 2:
 
 -open terminal
 -goto root dir of application
+-run command "npm install"
 -run command "node bin/www"
 
