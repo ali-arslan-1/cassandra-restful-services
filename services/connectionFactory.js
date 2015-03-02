@@ -23,8 +23,7 @@ exports.connect = function(options, callback){
     client = new cassandra.Client(clientOptions);
 
     client.connect(function(err){
-        console.log(err);
-        result(callback).connectCallback(err);
+        result(callback).connectCallback(err,null);
 
     });
 

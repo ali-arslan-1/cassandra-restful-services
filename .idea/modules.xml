@@ -2,8 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/../CassandraManager/.idea/CassandraManager.iml" filepath="$PROJECT_DIR$/../CassandraManager/.idea/CassandraManager.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/cassandra-viewer.iml" filepath="$PROJECT_DIR$/.idea/cassandra-viewer.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/CassandraManager.iml" filepath="$PROJECT_DIR$/.idea/CassandraManager.iml" />
     </modules>
   </component>
 </project>

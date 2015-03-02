@@ -21,7 +21,6 @@ var clearResponse = function(){
 module.exports = function(callback) {
     var ret =  {
         resultCallback: function(flag,err,res){
-            console.log(err,res);
             ret.setAttributes(err,res);
             callback(ret.getResponse());
         },
@@ -33,7 +32,7 @@ module.exports = function(callback) {
                 response.errorCode = 1;
             }else{
                 response.success = true;
-                if(connectionSaved)
+                if(connectionSaved || connectionSaved==null)
                     response.message = "Connection established successfully";
                 else{
                     response.message = "Connection established but error while saving";
