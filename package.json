@@ -8,13 +8,18 @@
   },
   "dependencies": {
     "body-parser": "~1.10.2",
+    "cassandra-driver": "^2.0.0",
     "cookie-parser": "~1.3.3",
     "debug": "~2.1.1",
     "express": "~4.11.1",
     "hjs": "~0.0.6",
     "jsonfile": "^2.0.0",
     "less-middleware": "1.0.x",
+    "mocha": "^2.1.0",
     "morgan": "~1.5.1",
-    "serve-favicon": "~2.2.0"
+    "serve-favicon": "~2.2.0",
+    "supertest": "^0.15.0",
+    "underscore": "^1.8.2",
+    "validator": "^3.32.0"
   }
 }
