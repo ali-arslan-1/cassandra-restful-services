@@ -1,4 +1,5 @@
-This application implemented on NodeJS provides RestFull services to communicate with Cassandra NoSQL database.
+This application implemented on NodeJS provides RestFull services to communicate with cassandra(http://cassandra.apache.org/) NoSQL database.
+
 
 # **REST API Specifications** #
 
